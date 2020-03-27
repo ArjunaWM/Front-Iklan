@@ -1,45 +1,54 @@
 <template>
-    <div class="limiter">
-		<div class="container-login100">
-			<div class="wrap-login100">
-				<form class="login100-form validate-form">
-					<span class="login100-form-title p-b-50">
-						Welcome
-					</span>
-
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is: a@b.c">
-						<input class="input100" type="text" name="email">
-						<span class="focus-input100" data-placeholder="Email"></span>
-					</div>
-
-					<div class="wrap-input100 validate-input" data-validate="Enter password">
-						<span class="btn-show-pass">
-							<i class="zmdi zmdi-eye"></i>
-						</span>
-						<input class="input100" type="password" name="pass">
-						<span class="focus-input100" data-placeholder="Password"></span>
-					</div>
-
-					<div class="container-login100-form-btn">
-						<div class="wrap-login100-form-btn">
-							<div class="login100-form-bgbtn"></div>
-							<button class="login100-form-btn">
-								Login
-							</button>
-						</div>
-					</div>
-
-					<div class="text-center p-t-5">
-						<span class="txt1">
-							Don’t have an account?
-						</span>
-
-						<a class="txt2" href="#">
-							Sign Up
-						</a>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+  <div class="register-area ptb-100">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12 col-12 col-lg-6 col-xl-6 ml-auto mr-auto">
+          <div class="login">
+            <div class="login-form-container">
+              <div class="login-form">
+                <form action="#" method="post" v-on:submit.prevent="Login">
+                  <input type="text" name="user-email" placeholder="Email" v-model="email" />
+                  <input
+                    type="password"
+                    name="user-password"
+                    placeholder="Password"
+                    v-model="password"
+                  />
+                  <div class="button-box">
+                    <div class="login-toggle-btn">
+                      <label>Belum terdaftar?</label>
+                      <a href="/register">Sign up</a>
+                    </div>
+                    <!-- <button type="submit" class="default-btn floatright" value="login">Login</button> -->
+                    <input type="submit" name="login" class="default-btn floatright" value="login" />
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
+
+<script>
+  export default {
+    data() {
+      return {
+        email: "",
+        password: ""
+      };
+    },
+    methods: {
+      Login: function() {
+        let email = this.email;
+        let password = this.password;
+        this.$store
+          .dispatch("login", { email, password })
+          .then(() => this.$router.push("/"))
+          .catch(err => console.log(err));
+      }
+    }
+  };
+</script>
